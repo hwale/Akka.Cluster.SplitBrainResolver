@@ -8,12 +8,12 @@ using static Akka.Cluster.ClusterEvent;
 
 namespace Akka.Cluster.SplitBrainResolver
 {
-    public sealed class KeepMajorityRefereeStrategy : IDowningStrategy
+    public sealed class KeepMajorityRefereeDowningStrategy : IDowningStrategy
     {
         public Address Address { get; }
         public string Role { get; }
 
-        public KeepMajorityRefereeStrategy(string address, string role = null)
+        public KeepMajorityRefereeDowningStrategy(string address, string role = null)
         {
             if (string.IsNullOrWhiteSpace(address))
                 throw new ArgumentNullException(nameof(address));
@@ -21,7 +21,7 @@ namespace Akka.Cluster.SplitBrainResolver
             Role = role;
         }
 
-        public KeepMajorityRefereeStrategy(Config config)
+        public KeepMajorityRefereeDowningStrategy(Config config)
             : this(
                 config.GetString("akka.cluster.split-brain-resolver.keep-referee.address"),
                 role: config.GetString("akka.cluster.split-brain-resolver.keep-majority.role")
